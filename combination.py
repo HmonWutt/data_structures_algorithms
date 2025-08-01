@@ -1,4 +1,4 @@
-import copy
+
 def combination(string,mod):
     if not string:
         if not mod:

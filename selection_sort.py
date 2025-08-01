@@ -1,28 +1,33 @@
 def selection_sort(arr):
-    for i,_ in enumerate(arr):
-        smallest = arr[i]
-        for j in range(i+1,len(arr)):
-            if arr[j]< smallest:
-                smallest = arr[j]
-            arr[i]=smallest
+    for ind,i in enumerate(arr):
+        smallest_ind = find_smallest(arr,ind)
+        arr[ind],arr[smallest_ind]= arr[smallest_ind],arr[ind]
     return arr
-#arr = [10,3,1,3,10,9]
-arr=[9,3,2]
-#print(selection_sort(arr))
-def selection_Rsort(arr,i,o,smallest,ind):
 
-    if o == len(arr)-1:
+def find_smallest(arr,start):
+    smallest = (-1,float('inf'))
+    for i in range(start,len(arr)):
+        if arr[i]<smallest[1]:
+            smallest = (i,arr[i])
+    return smallest[0]
+
+arr = [8,3,9,1,4]
+#selection_sort(arr)
+
+def recursive_find_smallest(arr,current,smallest,smallest_ind):
+    if current == len(arr)-1:
+        return smallest_ind
+    if arr[current] < smallest:
+        return recursive_find_smallest(arr,current+1,arr[current],current)
+    return recursive_find_smallest(arr, current+1,smallest,smallest_ind)
+
+
+def recursive_selection_sort(ind,arr):
+    if ind == len(arr)-1:
         return arr
-    if i == len(arr):
-        arr [o],arr[ind] = arr[ind],arr[o]
-        smallest = arr[o]
-        o+=1
-        return selection_Rsort(arr,o,o+1,smallest,ind)
-    else:
-        if arr[i]< smallest:
-            smallest = arr[i]
-            ind =i
-        return selection_Rsort(arr,i+1,o,smallest,ind)
-i = 1
-o = 0
-print(selection_Rsort(arr,o+1,o,arr[o],-1))
+    smallest_ind = recursive_find_smallest(arr,ind,float('inf'),-1)
+    arr[ind],arr[smallest_ind]= arr[smallest_ind],arr[ind]
+    return recursive_selection_sort(ind+1,arr)
+
+recursive_selection_sort(0,arr)
+print(arr)

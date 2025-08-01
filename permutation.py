@@ -9,7 +9,7 @@ def permutation(arr,mod):
         second = mod[i:]
         tmp = first+ch+second
         permutation(arr[1:],tmp)           
-#print(permutation( "abc",""))
+print(permutation( "abc",""))
 
 def permutation_lst(arr,mod):
     if not arr:

@@ -1,21 +1,14 @@
-def binary_search(arr,target):
-    mid = len(arr)//2
-    if mid == 0:
-        return -1
-    if target == arr[mid]:
+def binary_search(arr,target,start,end):
+    mid = start+((end-start)//2)
+    if arr[mid]==target:
         return mid
-    if target > arr[mid]:
-        return binary_search(arr[mid+1:],target)
-    return binary_search(arr[:mid],target)
+    if arr[mid]<target:
+        return binary_search(arr[mid+1:], target,mid+1,end)
+    else:
+        return binary_search(arr[start:mid],target,start,mid)
+
     
-
-binary_search([1,2,4,6,8,11],13)
-    
-
-
-
-
-
-
+arr = [1,4,5,8,9,10]
+print(binary_search(arr,4,0,len(arr)-1))
 
 
