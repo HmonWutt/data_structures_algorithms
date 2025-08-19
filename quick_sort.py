@@ -1,20 +1,27 @@
-def quick_sort(arr,s,e):
-    left = s
-    right = e
-    pivot = s+(e-s)//2
-    if s == e:
-        return arr
-    while left<=right:
-        while arr[left]<arr[pivot]:
-            left +=1
-        while arr[right]>arr[pivot]:
-            right-=1
+def quick_sort(nums, low, high):
+    if high <= low:
+        return 
+    pivot = low +(high-low)//2
+    s=low
+    e = high
+    while s < e:
+        while nums[s] < nums[pivot]:
+            s+=1
+        while nums[e] > nums[pivot]:
+            e-=1
+        if e >= s:
+            nums[s],nums[e] = nums[e],nums[s]
+            e-=1
+            s+=1
+    quick_sort(nums,low,e)
+    quick_sort(nums,s,high)
+    
 
-        if left <=right:
-            arr[left],arr[right] =arr[right],arr[left]
-            left+=1
-    quick_sort(arr,s,pivot)
-    quick_sort(arr,pivot+1,e)
-arr = [8,3,8,9,2,4,6,7,1,2]
-print(quick_sort(arr,0,len(arr)-1))
-print(arr)
+
+def partition(nums, low, high):
+    pass
+
+
+nums = [5,3,4,2,1]
+quick_sort(nums,0,len(nums)-1)
+print(nums)
